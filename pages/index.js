@@ -1,209 +1,167 @@
-import Head from 'next/head'
+import { useState } from 'react'
+import { Card,CardMedia,Grid,ButtonBase,Typography,Modal,Box,Stack,Avatar } from '@mui/material'
+import { styled } from '@mui/material/styles';
+import EmailIcon from '@mui/icons-material/Email';
+import HomeIcon from '@mui/icons-material/Home';
+import BloodtypeIcon from '@mui/icons-material/Bloodtype';
+import PublicIcon from '@mui/icons-material/Public';
+import Link from 'next/link'
 
-export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  });
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+  const boxStyle = {
+    position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { xs: "330px", md: "500px" },
+  bgcolor: "background.paper",
+  border: "white solid 2px",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+  alignItems: "center",
+  };
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+  const A = styled('a')({
+    textDecoration: 'none',
+    color: '#0074D9',
+    cursor: 'pointer',
+  });
+const Search = ()=>{
+    const [open,setOpen]=useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+      };
+      const handleClose = () => {
+        setOpen(false);
+      };
+    return(
+        <>
+        <Grid container spacing={2}>
+            <Grid item xs={4}>
+                <ButtonBase onClick={handleOpen} sx={{width:"100%"}}>                
+                    <Card elevation={5} sx={{padding:3, minHeight:"100px",width:"100%"}}>
+                        <Grid container spacing={1} direction="row">
+                            <Grid item xs={4}>
+                                <Avatar src="/images/GenericMale.png" sx={{width:"100px", height:"100px"}} variant="rounded"/>
+                            </Grid>
+                            <Grid item container direction="column" sx={{alignItems:"right"}} xs={8}>
+                                <Grid item>
+                                    <Typography textAlign="center">Student Name</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography textAlign="center">DEPT</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography textAlign="center">ROLL</Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Card>
+                </ButtonBase>
+                <Modal open={open} onClose={handleClose}>
+                    <Box sx={boxStyle} maxWidth="100">
+                        <Stack spacing={3}>
+                            <Typography textAlign="center" variant="h4"><b>NAME</b></Typography>
+                            <div align="center">
+                            <Avatar src="/images/GenericMale.png" sx={{width:200, height:200}} variant="rounded"/>
+                            </div>
+                            <Typography variant="subtitle1" align="center">
+                                DEPT
+                            </Typography>
+                            <Typography variant="subtitle1" align="center">
+                                ROLL
+                            </Typography>
+                            <Typography variant="subtitle1" align="center">
+                                H13, A666
+                            </Typography>
+                            <Grid container spacing={1}>
+                                <Grid item xs={4}>
+                                    <Stack alignItems="center">
+                                        <EmailIcon/>
+                                        <Typography variant="subtitle2" color="textSecondary">nameYXX@iitk.ac.in</Typography>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Stack alignItems="center">
+                                        <HomeIcon/>
+                                        <Typography variant="subtitle2" color="textSecondary">Kanpur, U.P.</Typography>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Stack alignItems="center">
+                                        <BloodtypeIcon/>
+                                        <Typography variant="subtitle2" color="textSecondary">AB+</Typography>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
+                            <Stack direction="column" align="center">
+                                <Link href="#">
+                                    <a>
+                                        <PublicIcon />
+                                        <Typography variant="subtitle2"><a className="underline">Homepage</a></Typography>
+                                    </a>
+                                </Link>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Modal>
+            </Grid>
+            <Grid item xs={4}>
+                <Card elevation={5} sx={{padding:3, minHeight:"100px"}}>
+                    <div> 
+                        NAME
+                    </div>
+                    <div>EE </div>
+                </Card>
+            </Grid>
+            <Grid item xs={4}>
+                <Card elevation={5} sx={{padding:3, minHeight:"100px"}}>
+                    <div> 
+                        NAME
+                    </div>
+                    <div>EE </div>
+                </Card>
+            </Grid>     
+        </Grid>
+        <style jsx>{`
+            a{
+                text-decoration: none;
+                color: #0074D9;
+              }
+              .underline{
+                position: relative;
+              }
+              
+              .underline::before{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 0;
+                height: 2px;
+                background-color: #0074D9;
+                transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+              }
+              
+              @media (hover: hover) and (pointer: fine) {
+                .underline:hover::before{
+                  left: 0;
+                  right: auto;
+                  width: 100%;
+                }
+              }
+        `
         }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+        </style>
+        </>
+    )
 }
+
+export default Search
